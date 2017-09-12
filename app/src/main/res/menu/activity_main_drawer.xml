@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/nav_group"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cv"
+            android:icon="@drawable/ic_cv"
+            android:title="@string/cv_info"/>
+        <item
+            android:id="@+id/nav_githup"
+            android:icon="@drawable/ic_githup"
+            android:title="@string/githup"/>
+        <item
+            android:id="@+id/nav_csdn"
+            android:icon="@drawable/ic_csdn"
+            android:title="@string/csdn"/>
+        <item
+            android:id="@+id/nav_jianshu"
+            android:icon="@drawable/ic_jianshu"
+            android:title="@string/jianshu"/>
+        <item
+            android:id="@+id/nav_word"
+            android:icon="@drawable/ic_word"
+            android:title="@string/word"/>
+    </group>
+
+    <item android:title="@string/call_me">
+        <menu>
+            <item
+                android:id="@+id/nav_phone"
+                android:icon="@drawable/ic_phone"
+                android:title="@string/phone_number"/>
+            <item
+                android:id="@+id/nav_we_chat"
+                android:icon="@drawable/ic_wechat"
+                android:title="@string/we_chat"/>
+            <item
+                android:id="@+id/nav_qq"
+                android:icon="@drawable/ic_qq"
+                android:title="@string/qq"/>
+        </menu>
+    </item>
+</menu>

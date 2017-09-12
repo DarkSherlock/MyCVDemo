@@ -1,0 +1,38 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="toolbarNavigationButtonStyle">@style/mToolbarNavigationButtonStyle</item>
+        <!--&lt;!&ndash;toolbar内的控件（自定义的或者系统预置的如标题）距离NavigationIcon和屏幕左边的距离，类似marginStart&ndash;&gt;-->
+        <item name="toolbarStyle">@style/mToolbarStyle</item>
+    </style>
+
+    <style name="AppTheme" parent="BaseTheme"></style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="mToolbarNavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="mToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">20dp</item>
+        <item name="contentInsetStartWithNavigation">20dp</item>
+        <!--使自定义view可以贴左右的边，多数版本的系统不要下面两句也可以，但少量版本必须加下面的两句-->
+    </style>
+
+    <style name="horizontalLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/bg_line</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+    <style name="horizontalBlueLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/bg_line_blue</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+</resources>

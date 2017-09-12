@@ -1,0 +1,64 @@
+<resources>
+    <string name="app_name">我的简历</string>
+    <!-- nav header view-->
+    <string name="my_mail">tind.liang@foxmail.com</string>
+    <string name="my_name">梁天德</string>
+    <string name="name_colon">姓名:</string>
+    <string name="job_name_colon">职位:</string>
+    <string name="phone_colon">电话:</string>
+    <string name="email_colon">邮箱:</string>
+    <string name="my_school">集美大学</string>
+    <string name="my_sex">男</string>
+
+    <string name="navigation_drawer_open">打开抽屉</string>
+    <string name="navigation_drawer_close">关闭抽屉</string>
+    <string name="iv_icon">头像</string>
+    <!-- nav menu-->
+    <string name="cv_info">简历信息</string>
+    <string name="jianshu">简书主页</string>
+    <string name="githup">Githup主页</string>
+    <string name="csdn">CSDN主页</string>
+    <string name="word">Word简历下载</string>
+    <string name="call_me">联系我</string>
+    <string name="phone_number">15659827282</string>
+    <string name="we_chat">tindssf</string>
+    <string name="qq">627669608</string>
+
+    <string name="copy">复制</string>
+    <string name="open_we_chat">打开微信</string>
+    <!--dialog-->
+    <string name="confirm">确定</string>
+    <string name="cancle">取消</string>
+    <string name="warm_tip">温馨提示</string>
+
+    <string name="tip_no_install_we_chat">请先安装微信!</string>
+    <string name="tip_no_install_qq">请先安装QQ!</string>
+    <string name="request_call_permission">申请通话权限</string>
+    <string name="tip_rationale_request_call_permission">不给予权限无法直接拨通电话联系我!</string>
+    <string name="tip_can_reset_permission_in_setting">可以在设置中心重新设置给予权限!</string>
+    <string name="tip_install_open_word_app">请先安装能打开Word文档软件</string>
+    <string name="tip_no_support_open_file">不支持打开该文件!</string>
+    <string name="tip_cv_download_completed">简历下载完毕</string>
+    <string name="tip_make_we_chat_friend_by_code">扫描二维码加我微信好友</string>
+    <string name="tip_make_we_chat_friend_by_count">或者复制微信号:tindssf加我微信好友</string>
+    <string name="tip_copyed_we_chat_to_clipboard">已复制微信号到剪贴板!</string>
+    <string name="tip_open_word_file_or_not">word简历已下载完毕是否打开?</string>
+    <string name="tip_call_phone_or_not">是否电话联系我?</string>
+    <!--rv header view title -->
+    <string name="edu_background">教育背景</string>
+    <string name="job_experience">工作经历</string>
+    <string name="personal_homepage">个人主页</string>
+    <string name="professional_skills">专业技能</string>
+    <string name="project_introduction">项目介绍</string>
+    <string name="self_evaluation">自我评价</string>
+    <string name="tip_can_open_in_nav">可在左滑菜单导航中打开相应主页</string>
+
+    <string name="copyright_colon">所属公司: </string>
+    <string name="dev_tool_colon">开发工具: </string>
+    <string name="download_url_colon">下载链接: </string>
+    <string name="project_desc_colon">项目简介: </string>
+    <string name="project_technology_colon">技术实现: </string>
+
+    <string name="action_exit">退出</string>
+    <string name="tip_exit_once_more">再按一次退出</string>
+</resources>
