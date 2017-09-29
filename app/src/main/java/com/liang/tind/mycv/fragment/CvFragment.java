@@ -5,6 +5,8 @@ import android.view.View;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.kingja.loadsir.core.LoadService;
+import com.kingja.loadsir.core.LoadSir;
 import com.liang.tind.mycv.R;
 import com.liang.tind.mycv.adapter.FixLayoutAdapter;
 import com.liang.tind.mycv.adapter.LinearLayoutAdapter;
@@ -20,6 +22,7 @@ import com.liang.tind.mycv.presenter.CvFragmentPresenter;
 import com.liang.tind.mycv.utils.LayoutHelperUtil;
 import com.liang.tind.mycv.utils.ToastUtil;
 import com.liang.tind.mycv.view.CvFragmentView;
+import com.liang.tind.mycv.view.callback.LoadingCallback;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -47,6 +50,7 @@ public class CvFragment extends BaseFragment implements CvFragmentView {
     private DelegateAdapter mDelegateAdapter;
     private RecyclerView mRecyclerView;
     private View.OnClickListener mGoTopListener;
+    private LoadService mLoadService;
 
     @Override
     protected void initView(View view) {
@@ -54,16 +58,16 @@ public class CvFragment extends BaseFragment implements CvFragmentView {
 
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
         mRecyclerView.setRecycledViewPool(viewPool);
-        viewPool.setMaxRecycledViews(9,10 );
+        viewPool.setMaxRecycledViews(9, 10);
 
         StickyLayoutAdapter stickyLayoutAdapter = LayoutHelperUtil.initStickyLayoutHelper(getContext(), mBasicInfoEntityList);
         mEduLinearLayoutAdapter = LayoutHelperUtil.initLinearLayoutAdapter(getContext(), LinearLayoutAdapter.MODE_EDUCATION_INFO);
         mJobLinearLayoutAdapter = LayoutHelperUtil.initLinearLayoutAdapter(getContext(), LinearLayoutAdapter.MODE_JOB_EXPERIENCE);
         mHomepageAdapter = LayoutHelperUtil.initHomepageAdapter(getContext(), null);
         ProfessionalSkillAdapter skillAdapter = LayoutHelperUtil.initSkillAdapter(getContext(), mSkillEntityList);
-        mFixLayoutAdapter = LayoutHelperUtil.initScrollFixLayout(getContext(),mGoTopListener);
-        mProjectAdapter = LayoutHelperUtil.initProjectAdapter(getContext(),mProjectIntroductionList);
-        mSelfEvaluationAdapter = LayoutHelperUtil.initSelfEvaluationAdapter(getContext(),null);
+        mFixLayoutAdapter = LayoutHelperUtil.initScrollFixLayout(getContext(), mGoTopListener);
+        mProjectAdapter = LayoutHelperUtil.initProjectAdapter(getContext(), mProjectIntroductionList);
+        mSelfEvaluationAdapter = LayoutHelperUtil.initSelfEvaluationAdapter(getContext(), null);
 
         adapters.add(stickyLayoutAdapter);
         adapters.add(mHomepageAdapter);
@@ -76,7 +80,7 @@ public class CvFragment extends BaseFragment implements CvFragmentView {
 
         VirtualLayoutManager manager = new VirtualLayoutManager(getContext());
         mRecyclerView.setLayoutManager(manager);
-        mDelegateAdapter = new DelegateAdapter(manager,true);
+        mDelegateAdapter = new DelegateAdapter(manager, true);
 
 //        mDelegateAdapter.setAdapters(adapters);
 //        mRecyclerView.setAdapter(mDelegateAdapter);
@@ -93,7 +97,16 @@ public class CvFragment extends BaseFragment implements CvFragmentView {
 //            showToast(" on click go to top btn");
             mRecyclerView.smoothScrollToPosition(0);
         };
-        mPresenter.loadData();
+
+        mLoadService = LoadSir.getDefault().register(mRootView, v -> {
+            mLoadService.showCallback(LoadingCallback.class);
+            mPresenter.loadData(mLoadService);});
+        mPresenter.loadData(mLoadService);
+    }
+
+    @Override
+    protected View getRootView() {
+        return mLoadService.getLoadLayout();
     }
 
     @Override
@@ -103,7 +116,7 @@ public class CvFragment extends BaseFragment implements CvFragmentView {
 
 
     @Override
-    public void showProcess() {
+    public void showProcess(long process, long max) {
 
     }
 
@@ -113,8 +126,18 @@ public class CvFragment extends BaseFragment implements CvFragmentView {
     }
 
     @Override
+    public void error() {
+
+    }
+
+    @Override
+    public void showProcessDialog() {
+
+    }
+
+    @Override
     public void showToast(String s) {
-        ToastUtil.showToast(getContext(),s);
+        ToastUtil.showToast(getContext(), s);
     }
 
     @Override
@@ -125,13 +148,13 @@ public class CvFragment extends BaseFragment implements CvFragmentView {
         mSkillEntityList.addAll(bean.getCvDetailInfo().getProfessionalSkills());
         mEduLinearLayoutAdapter.setEducationInfoEntityList(bean.getCvDetailInfo().getEducationInfo());
         mFixLayoutAdapter.setListener(mGoTopListener);
-          mProjectIntroductionList.addAll(bean.getCvDetailInfo().getProjectInstruction());
+        mProjectIntroductionList.addAll(bean.getCvDetailInfo().getProjectInstruction());
         mSelfEvaluationAdapter.setContent(bean.getCvDetailInfo().getSelfEvaluation());
         notifyDataSetChanged();
     }
 
     private void notifyDataSetChanged() {
-
+//        mDelegateAdapter.notifyDataSetChanged();
         mDelegateAdapter.setAdapters(adapters);
         mRecyclerView.setAdapter(mDelegateAdapter);
     }

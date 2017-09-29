@@ -124,7 +124,7 @@ public class SnackbarUtil {
                 setSnackbarColor(snackbar, green);
                 break;
             case Warning:
-                setSnackbarColor(snackbar, orange);
+                setSnackbarColor(snackbar, ColorUtil.getColor(snackbar.getContext(),R.color.colorAccent));
                 break;
             case Alert:
                 setSnackbarColor(snackbar, Color.YELLOW, red);

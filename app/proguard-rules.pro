@@ -316,3 +316,7 @@
 
 # Marshmallow removed Notification.setLatestEventInfo()
 -dontwarn android.app.Notification
+
+#loadsir
+-dontwarn com.kingja.loadsir.**
+-keep class com.kingja.loadsir.** {*;}

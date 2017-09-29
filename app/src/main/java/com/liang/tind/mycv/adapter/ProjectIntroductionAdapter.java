@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
@@ -79,24 +80,27 @@ public class ProjectIntroductionAdapter extends DelegateAdapter.Adapter<Recycler
             normalViewHolder.mTvProjectTec.setText(entity.getProjectTechnology());
 
             String downloadUrl = entity.getDownloadUrl();
-            SpannableString smp = new SpannableString(downloadUrl);
+            if (!TextUtils.isEmpty(downloadUrl)) {
+                SpannableString smp = new SpannableString(downloadUrl);
 
-            ClickableSpan clickableSpan = new ClickableSpan() {
-                @Override
-                public void onClick(View widget) {
-                    Uri uri = Uri.parse(downloadUrl);
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(uri);
-                    context.startActivity(intent);
-                }
-            } ;
-            //设置点击
-            smp.setSpan(clickableSpan, 0 , downloadUrl.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            //设置前景色
-            smp.setSpan(new ForegroundColorSpan(ColorUtil.getColor(context,R.color.selected_blue)),
-                    0, downloadUrl.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            normalViewHolder.mTvDownloadUrl.setMovementMethod(LinkMovementMethod.getInstance());
-            normalViewHolder.mTvDownloadUrl.setText(smp);
+                ClickableSpan clickableSpan = new ClickableSpan() {
+                    @Override
+                    public void onClick(View widget) {
+                        Uri uri = Uri.parse(downloadUrl);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(uri);
+                        context.startActivity(intent);
+                    }
+                } ;
+                //设置点击
+                smp.setSpan(clickableSpan, 0 , downloadUrl.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                //设置前景色
+                smp.setSpan(new ForegroundColorSpan(ColorUtil.getColor(context,R.color.selected_blue)),
+                        0, downloadUrl.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                normalViewHolder.mTvDownloadUrl.setMovementMethod(LinkMovementMethod.getInstance());
+                normalViewHolder.mTvDownloadUrl.setText(smp);
+            }
+
         }
     }
 

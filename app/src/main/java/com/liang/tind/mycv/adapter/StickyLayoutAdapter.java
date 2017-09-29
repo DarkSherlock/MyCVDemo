@@ -54,7 +54,7 @@ public class StickyLayoutAdapter extends DelegateAdapter.Adapter<StickyLayoutAda
         holder.tvEmail.setText(basicInfoEntity.getEmail());
         holder.tvJobName.setText(basicInfoEntity.getJobIntention());
         holder.tvPhone.setText(basicInfoEntity.getPhone());
-        holder.ivHead.loadImage(Constant.URL.IMG_HEAD_URL, R.mipmap.ic_launcher);
+        holder.ivHead.loadImage(Constant.URL.IMG_HEAD_URL, R.mipmap.image_head);
     }
 
     @Override

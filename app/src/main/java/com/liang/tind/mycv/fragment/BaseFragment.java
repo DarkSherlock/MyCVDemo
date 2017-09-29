@@ -18,6 +18,7 @@ import com.orhanobut.logger.Printer;
 public abstract class BaseFragment extends Fragment{
     protected String TAG ;
     protected Printer mLogger;
+    protected View mRootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,10 +30,10 @@ public abstract class BaseFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(),container,false);
-        initView(view);
+        mRootView = inflater.inflate(getLayoutId(),container,false);
+        initView(mRootView);
         initData();
-        return view;
+        return getRootView();
     }
 
     @Override
@@ -44,4 +45,8 @@ public abstract class BaseFragment extends Fragment{
     protected abstract void initView(View view);
     protected abstract void initData();
     protected abstract @LayoutRes int getLayoutId();
+    protected View getRootView(){
+
+        return mRootView;
+    }
 }

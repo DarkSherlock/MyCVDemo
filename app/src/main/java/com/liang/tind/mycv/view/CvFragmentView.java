@@ -7,6 +7,10 @@ import com.liang.tind.mycv.model.CvInfoBean;
  */
 
 public interface CvFragmentView extends BaseView {
-
-    void showCvDetailInfo(CvInfoBean bean );
+    /**
+     * {@link com.liang.tind.mycv.fragment.CvFragment#showCvDetailInfo(CvInfoBean)}
+     *
+     * @param bean
+     */
+    void showCvDetailInfo(CvInfoBean bean);
 }

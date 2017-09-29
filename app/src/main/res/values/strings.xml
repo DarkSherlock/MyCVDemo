@@ -31,11 +31,18 @@
     <string name="cancle">取消</string>
     <string name="warm_tip">温馨提示</string>
 
+    <string name="re_download">重新下载</string>
+    <string name="dont">朕偏偏不</string>
+
     <string name="tip_no_install_we_chat">请先安装微信!</string>
     <string name="tip_no_install_qq">请先安装QQ!</string>
     <string name="request_call_permission">申请通话权限</string>
+    <string name="request_storage_permission">申请读写SD卡权限</string>
     <string name="tip_rationale_request_call_permission">不给予权限无法直接拨通电话联系我!</string>
+    <string name="tip_rationale_request_write_storage">不给予权限无法保存简历到手机SD卡!</string>
+    <string name="tip_rationale_request_read_storage">不给予权限无法打开简历!</string>
     <string name="tip_can_reset_permission_in_setting">可以在设置中心重新设置给予权限!</string>
+    <string name="tip_give_permission_in_setting">是否去设置中心打开权限?</string>
     <string name="tip_install_open_word_app">请先安装能打开Word文档软件</string>
     <string name="tip_no_support_open_file">不支持打开该文件!</string>
     <string name="tip_cv_download_completed">简历下载完毕</string>
@@ -44,6 +51,7 @@
     <string name="tip_copyed_we_chat_to_clipboard">已复制微信号到剪贴板!</string>
     <string name="tip_open_word_file_or_not">word简历已下载完毕是否打开?</string>
     <string name="tip_call_phone_or_not">是否电话联系我?</string>
+    <string name="tip_download_cv_or_not">是否要下载简历?</string>
     <!--rv header view title -->
     <string name="edu_background">教育背景</string>
     <string name="job_experience">工作经历</string>
@@ -60,5 +68,15 @@
     <string name="project_technology_colon">技术实现: </string>
 
     <string name="action_exit">退出</string>
+    <string name="action_delete_cv">删除下载简历</string>
     <string name="tip_exit_once_more">再按一次退出</string>
+    <string name="message_share" formatted="false">
+        我发现一个Android开发者——【梁天德】还不错，你也来看看他的简历吧!
+        他的简历展示安卓应用安装包(apk)下载链接: http://o6v28pmb0.bkt.clouddn.com/apk/mycv-release-1.0.2.apk ;
+        简历Word下载: http://o6v28pmb0.bkt.clouddn.com/atta/%E9%9B%86%E7%BE%8E%E5%A4%A7%E5%AD%A6%E6%A2%81%E5%A4%A9%E5%BE%B7%E6%9C%AC%E7%A7%91Andoid%E7%AE%80%E5%8E%86.doc ;
+        Githup主页: https://github.com/DarkSherlock ;
+        CSDN主页: http://blog.csdn.net/tinderliang ;
+        简书主页: http://www.jianshu.com/u/5be39d429e58 ;
+        </string>
+    <string name="share_to_myfriends">分享给我的朋友</string>
 </resources>

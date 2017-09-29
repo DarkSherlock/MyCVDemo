@@ -1,22 +1,24 @@
 package com.liang.tind.mycv.http;
 
+import com.orhanobut.logger.Logger;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.HashMap;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
+import io.reactivex.processors.FlowableProcessor;
+import io.reactivex.processors.PublishProcessor;
 import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
-import io.reactivex.subjects.Subject;
 
 
 public class RxBus {
 
     private static volatile RxBus mInstance;
-    private HashMap<String, CompositeDisposable> mSubscriptionMap;
-    private Subject<Object> mSubject;
+    private HashMap<String, Subscription> mSubscriptionMap;
+    private FlowableProcessor<Object> mBus;
 
     /**
      *  PublishSubject只会把在订阅发生的时间点之后来自原始Observable的数据发射给观察者
@@ -24,7 +26,7 @@ public class RxBus {
      *  需要将 Subject转换为一个 SerializedSubject ，上述RxBus类中把线程非安全的PublishSubject包装成线程安全的Subject。
      */
     private RxBus() {
-        mSubject = PublishSubject.create().toSerialized();
+        mBus = PublishProcessor.create().toSerialized();
     }
 
     /**
@@ -47,7 +49,7 @@ public class RxBus {
      * @param o
      */
     public void post(Object o) {
-        mSubject.onNext(o);
+        mBus.onNext(o);
     }
 
     /**
@@ -56,32 +58,26 @@ public class RxBus {
      * @param <T>
      * @return
      */
-    public <T> Observable<T> tObservable(final Class<T> type) {
+    public <T> Flowable<T> tObservable(final Class<T> type) {
         //ofType操作符只发射指定类型的数据，其内部就是filter+cast
-        return mSubject.ofType(type);
+        return mBus.ofType(type);
     }
 
-    public <T> Disposable doSubscribe(Class<T> type, Consumer<T> next, Consumer<Throwable> error) {
-        return tObservable(type)
+    public <T> void doSubscribe(Class<T> type,Subscriber<T> subscriber) {
+        tObservable(type)
                 .subscribeOn(Schedulers.io())
+                .onBackpressureLatest()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(next, error);
+                .subscribe(subscriber);
     }
 
-    public void addSubscription(Object o, Disposable subscription) {
+    public void addSubscription(Object o, Subscription subscription) {
 
         if (mSubscriptionMap == null) {
             mSubscriptionMap = new HashMap<>();
         }
         String key = o.getClass().getName();
-        if (mSubscriptionMap.get(key) != null) {
-            mSubscriptionMap.get(key).add(subscription);
-        } else {
-            CompositeDisposable compositeSubscription = new CompositeDisposable();
-            compositeSubscription.add(subscription);
-            mSubscriptionMap.put(key, compositeSubscription);
-          //  Log.e("air", "addSubscription:订阅成功 " );
-        }
+        if (mSubscriptionMap.get(key)==null) mSubscriptionMap.put(key, subscription);
     }
 
     public void unSubscribe(Object o) {
@@ -93,10 +89,10 @@ public class RxBus {
             return;
         }
         if (mSubscriptionMap.get(key) != null) {
-            mSubscriptionMap.get(key).dispose();
+            mSubscriptionMap.get(key).cancel();
+            Logger.e("unSubscribe  cancel");
         }
         mSubscriptionMap.remove(key);
-        //Log.e("air", "unSubscribe: 取消订阅" );
     }
 
 }

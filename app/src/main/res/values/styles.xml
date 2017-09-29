@@ -13,7 +13,14 @@
 
     <style name="AppTheme" parent="BaseTheme"></style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    </style>
+
+    <style name="Toolbar.PopupTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@drawable/selector_toolbar_pop_menu_text_color</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:colorBackground">@color/colorAccent</item>
+    </style>
 
     <style name="mToolbarNavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
         <item name="android:minWidth">0dp</item>
@@ -22,17 +29,29 @@
     <style name="mToolbarStyle" parent="Widget.AppCompat.Toolbar">
         <item name="contentInsetStart">20dp</item>
         <item name="contentInsetStartWithNavigation">20dp</item>
+
         <!--使自定义view可以贴左右的边，多数版本的系统不要下面两句也可以，但少量版本必须加下面的两句-->
     </style>
 
+    <!-- 横线-->
     <style name="horizontalLine">
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@color/bg_line</item>
         <item name="android:layout_height">1px</item>
     </style>
-    <style name="horizontalBlueLine">
-        <item name="android:layout_width">match_parent</item>
+    <!--蓝色的横线-->
+    <style name="horizontalBlueLine" parent="horizontalLine">
         <item name="android:background">@color/bg_line_blue</item>
-        <item name="android:layout_height">1px</item>
+    </style>
+
+    <!--dialog style-->
+    <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 </resources>

@@ -3,8 +3,12 @@ package com.liang.tind.mycv.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.view.Display;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 
-public class UIutils {
+public class UIUtils {
 	/**
 	 * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
 	 */
@@ -35,5 +39,15 @@ public class UIutils {
 		int resourceId = context.getResources().getIdentifier(
 				"status_bar_height", "dimen", "android");
 		return context.getResources().getDimensionPixelSize(resourceId);
+	}
+
+	public static FrameLayout.LayoutParams getParams(Context context) {
+		WindowManager windowManager = (WindowManager) context
+				.getSystemService(Context.WINDOW_SERVICE);
+		Display sDefaultDisplay = windowManager.getDefaultDisplay();
+
+		return new FrameLayout.LayoutParams((int) (sDefaultDisplay.getWidth() * 0.80f),
+				ViewGroup.LayoutParams.WRAP_CONTENT);
+
 	}
 }

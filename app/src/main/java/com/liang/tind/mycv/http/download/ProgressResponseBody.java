@@ -1,6 +1,8 @@
 package com.liang.tind.mycv.http.download;
 
 
+import android.util.Log;
+
 import com.liang.tind.mycv.http.RxBus;
 
 import java.io.IOException;
@@ -52,6 +54,7 @@ public class ProgressResponseBody extends ResponseBody {
                 bytesReaded += bytesRead == -1 ? 0 : bytesRead;
                //实时发送当前已读取(上传/下载)的字节
                 RxBus.getInstance().post(new FileLoadEvent(contentLength(), bytesReaded));
+                Log.e("ProgressResponseBody", "read: "+bytesReaded );
                 return bytesRead;
             }
         };

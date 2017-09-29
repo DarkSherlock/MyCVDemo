@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
+
+import com.liang.tind.mycv.Constant;
 
 import java.io.File;
 import java.util.List;
@@ -101,11 +105,18 @@ public class OpenFileUtil {
 
 
     //android获取一个用于打开Word文件的intent
-    public static Intent getWordFileIntent(File file) {
+    public static Intent getWordFileIntent(Context context,File file) {
         Intent intent = new Intent("android.intent.action.VIEW");
         intent.addCategory("android.intent.category.DEFAULT");
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        Uri uri = Uri.fromFile(file);
+
+        Uri uri ;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            uri = FileProvider.getUriForFile(context, Constant.FILE.FILE_PROVIDER_NAME, file);
+        } else {
+            uri=Uri.fromFile(file);
+        }
         intent.setDataAndType(uri, "application/msword");
         return intent;
     }

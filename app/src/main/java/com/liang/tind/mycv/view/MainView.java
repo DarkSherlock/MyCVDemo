@@ -1,5 +1,6 @@
 package com.liang.tind.mycv.view;
 
+import com.liang.tind.mycv.MainActivity;
 import com.liang.tind.mycv.model.JobInfoBean;
 
 import java.io.File;
@@ -13,7 +14,7 @@ public interface MainView extends BaseView  {
 
     /**
      * 展示 简历下载完毕 提示信息
-     *
+     *{@link MainActivity#showCVDownloadCompleted()}
      */
     void showCVDownloadCompleted ();
 
@@ -25,5 +26,11 @@ public interface MainView extends BaseView  {
 
     void showOpenWordFileDialog(File file);
 
+    /**
+     * {@link com.liang.tind.mycv.MainActivity#showJobInfo(JobInfoBean)}
+     * @param bean
+     */
     void showJobInfo(JobInfoBean bean);
+
+
 }

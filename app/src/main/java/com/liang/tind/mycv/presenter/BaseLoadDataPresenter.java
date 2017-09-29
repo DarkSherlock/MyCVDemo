@@ -1,5 +1,6 @@
 package com.liang.tind.mycv.presenter;
 
+import com.kingja.loadsir.core.LoadService;
 import com.liang.tind.mycv.view.BaseView;
 
 /**
@@ -14,7 +15,7 @@ public abstract class BaseLoadDataPresenter extends BasePresenter {
     /**
      * 请求数据
      */
-    public abstract void loadData();
+    public abstract void loadData(LoadService loadService);
 
     /**
      * 刷新 请求数据

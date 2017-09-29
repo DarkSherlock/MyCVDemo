@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
@@ -61,7 +61,7 @@ public class FixLayoutAdapter extends DelegateAdapter.Adapter<FixLayoutAdapter.S
 
     public class ScrollFixViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView mButton;
+        private final ImageView mButton;
 
         public ScrollFixViewHolder(View itemView) {
             super(itemView);

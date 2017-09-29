@@ -6,7 +6,7 @@ apply from: 'tinker-support.gradle'
 bugly {
     appId = "178d118966"
     appKey = "66d09f7d-5b77-481b-a9f6-1249b02ee52e"
-    appVersion = "1.0"
+    appVersion = "1.0.2"
 }
 android {
     //res资源文件下有些图片格式不对（可能有的图片并非真正的9patch格式），设置以下2行代码，编译才能通过。
@@ -28,8 +28,8 @@ android {
         applicationId "com.liang.tind.mycv"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         ndk {
@@ -46,7 +46,7 @@ android {
             // Zipalign优化
             zipAlignEnabled true
 //            // 移除无用的resource文件
-//            shrinkResources false
+//            shrinkResources true
 //            // 前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            applicationVariants.all { variant ->
@@ -132,4 +132,6 @@ dependencies {
     }
     //https://github.com/wasabeef/recyclerview-animators rv 动画库
     compile 'jp.wasabeef:recyclerview-animators:2.2.7'
+//    http://www.jianshu.com/p/2d3537101281
+    compile 'com.kingja.loadsir:loadsir:1.2.0'
 }

@@ -36,23 +36,27 @@ public class Constant {
         public static final String JSON_JOB_INFO = "json_job_info.json";
 
         /**
-         * 工作信息 json
+         * 简历信息 json
          */
         public static final String JSON_CV_INFO = "json_cv_info.json";
 
-        public static final String JSON_NEW_CV_INFO = "json_new_cv_info.json";
+        public static final String JSON_NEW_CV_INFO = "json_cvinfo_1.0.5.json";
+
+        public static final String CV_DOWNLOAD_URL = "http://o6v28pmb0.bkt.clouddn.com/atta/my_cv.doc";
     }
 
     public static class FILE {
         /**
          * 文件下载根目录
          */
-        public static final String DOWNLOAD_DIR = Environment.getExternalStorageDirectory().getAbsolutePath()
+        public static final String DOWNLOAD_DIR = Environment.getExternalStorageDirectory()
                 + java.io.File.separator + "MyCVDownload";
         /**
          * word简历 文件名
          */
-        public static final String CV_FILE_NAME = "集美大学梁天德Word简历.docx";
+        public static final String CV_FILE_NAME = "集美大学梁天德Word简历.doc";
+
+        public static final String FILE_PROVIDER_NAME = "com.tind.liang.fileProvider";
     }
 
     /**

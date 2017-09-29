@@ -1,13 +1,13 @@
 package com.liang.tind.mycv.fragment;
 
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.FrameLayout;
 
 import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 import com.liang.tind.mycv.Constant;
 import com.liang.tind.mycv.R;
+import com.liang.tind.mycv.utils.ColorUtil;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -16,12 +16,7 @@ import com.orhanobut.logger.Logger;
 
 public class JianShuFragment extends BaseFragment {
     private AgentWeb mAgentWeb;
-    ChromeClientCallbackManager.ReceivedTitleCallback mCallback = new ChromeClientCallbackManager.ReceivedTitleCallback() {
-        @Override
-        public void onReceivedTitle(WebView view, String title) {
-            Logger.e(title);
-        }
-    };
+    ChromeClientCallbackManager.ReceivedTitleCallback mCallback = (view, title) -> Logger.e(title);
     @Override
     protected void initView(View view) {
 
@@ -32,7 +27,7 @@ public class JianShuFragment extends BaseFragment {
                 .setAgentWebParent((FrameLayout) view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                         FrameLayout.LayoutParams.MATCH_PARENT))
                 .useDefaultIndicator()// 使用默认进度条
-                .defaultProgressBarColor() // 使用默认进度条颜色
+                .setIndicatorColor(ColorUtil.getColor(getActivity(), R.color.colorAccent))
                 .setReceivedTitleCallback(mCallback) //设置 Web 页面的 title 回调
                 .createAgentWeb()//
                 .ready()

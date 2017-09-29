@@ -30,7 +30,7 @@ public class GithupFragment extends BaseFragment {
                 .setAgentWebParent((FrameLayout) view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                         FrameLayout.LayoutParams.MATCH_PARENT))
                 .useDefaultIndicator()// 使用默认进度条
-                .setIndicatorColor(ColorUtil.getColor(getContext(),R.color.selected_blue)) // 使用默认进度条颜色
+                .setIndicatorColor(ColorUtil.getColor(getContext(),R.color.colorAccent)) // 使用默认进度条颜色
                 .setReceivedTitleCallback(mCallback) //设置 Web 页面的 title 回调
                 .createAgentWeb()
                 .ready()

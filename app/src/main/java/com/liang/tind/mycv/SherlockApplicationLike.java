@@ -7,6 +7,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.multidex.MultiDex;
 
+import com.kingja.loadsir.core.LoadSir;
+import com.liang.tind.mycv.view.callback.EmptyCallback;
+import com.liang.tind.mycv.view.callback.ErrorCallback;
+import com.liang.tind.mycv.view.callback.LoadingCallback;
+import com.liang.tind.mycv.view.callback.TimeoutCallback;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -46,13 +51,25 @@ public class SherlockApplicationLike extends DefaultApplicationLike {
         Bugly.init(application, "178d118966", false);
         initLeakCanary();
         initLogger();
+        initLoadSir();
+    }
+
+    private void initLoadSir() {
+        LoadSir.beginBuilder()
+                .addCallback(new ErrorCallback())
+                .addCallback(new EmptyCallback())
+                .addCallback(new LoadingCallback())
+                .addCallback(new TimeoutCallback())
+                .setDefaultCallback(LoadingCallback.class)
+                .commit();
+
     }
 
     private void initLogger() {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true
-                .methodCount(5)         // (Optional) How many method line to show. Default 2
-                .methodOffset(7)        // (Optional) Hides internal method calls up to offset. Default 5
+                .methodCount(2)         // (Optional) How many method line to show. Default 2
+                .methodOffset(5)        // (Optional) Hides internal method calls up to offset. Default 5
 //                .logStrategy() // (Optional) Changes the log strategy to print out. Default LogCat
                 .tag("Tind")   // (Optional) Global tag for every log. Default PRETTY_LOGGER
                 .build();

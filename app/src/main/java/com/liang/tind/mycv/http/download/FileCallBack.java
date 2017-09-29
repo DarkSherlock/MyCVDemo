@@ -1,8 +1,12 @@
 package com.liang.tind.mycv.http.download;
 
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.liang.tind.mycv.http.RxBus;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,16 +14,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import okhttp3.ResponseBody;
 
 /**
  * Created by miya95 on 2016/12/5.
  */
 public abstract class FileCallBack<T> {
-
+    private static final String TAG = "FileCallBack";
     private String destFileDir;
     private String destFileName;
 
@@ -56,7 +57,7 @@ public abstract class FileCallBack<T> {
                 fos.write(buf, 0, len);
             }
             fos.flush();
-            unsubscribe();
+
             //onCompleted();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -76,20 +77,44 @@ public abstract class FileCallBack<T> {
      * 订阅加载的进度条
      */
     public void subscribeLoadProgress() {
-        Disposable disposable = RxBus.getInstance().doSubscribe(FileLoadEvent.class, new Consumer<FileLoadEvent>() {
+        Subscriber<FileLoadEvent> subscriber = new Subscriber<FileLoadEvent>() {
+            Subscription subscription;
 
             @Override
-            public void accept(@NonNull FileLoadEvent fileLoadEvent) throws Exception {
-                progress(fileLoadEvent.getBytesLoaded(), fileLoadEvent.getTotal());
+            public void onSubscribe(Subscription s) {
+                subscription = s;
+                s.request(1);
+                RxBus.getInstance().addSubscription(FileCallBack.this, s);
+                Log.e(TAG, "onSubscribe: addSubscription" );
             }
-        }, new Consumer<Throwable>() {
 
             @Override
-            public void accept(@NonNull Throwable throwable) throws Exception {
+            public void onNext(FileLoadEvent fileLoadEvent) {
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        progress(fileLoadEvent.getBytesLoaded(), fileLoadEvent.getTotal());
+                        SystemClock.sleep(30);
+                        subscription.request(1);
+                    }
+                }.start();
 
             }
-        });
-        RxBus.getInstance().addSubscription(this, disposable);
+
+            @Override
+            public void onError(Throwable t) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e(TAG, "onComplete: " );
+                unsubscribe();
+            }
+        };
+        RxBus.getInstance().doSubscribe(FileLoadEvent.class, subscriber);
+
     }
 
     /**
