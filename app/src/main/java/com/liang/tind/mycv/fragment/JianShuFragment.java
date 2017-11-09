@@ -1,5 +1,6 @@
 package com.liang.tind.mycv.fragment;
 
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -7,7 +8,6 @@ import com.just.library.AgentWeb;
 import com.just.library.ChromeClientCallbackManager;
 import com.liang.tind.mycv.Constant;
 import com.liang.tind.mycv.R;
-import com.liang.tind.mycv.utils.ColorUtil;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -27,7 +27,7 @@ public class JianShuFragment extends BaseFragment {
                 .setAgentWebParent((FrameLayout) view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                         FrameLayout.LayoutParams.MATCH_PARENT))
                 .useDefaultIndicator()// 使用默认进度条
-                .setIndicatorColor(ColorUtil.getColor(getActivity(), R.color.colorAccent))
+                .setIndicatorColor(ContextCompat.getColor(getActivity(), R.color.colorAccent))
                 .setReceivedTitleCallback(mCallback) //设置 Web 页面的 title 回调
                 .createAgentWeb()//
                 .ready()

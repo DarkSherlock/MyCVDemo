@@ -14,4 +14,13 @@
         <attr name="canReBackable" format="boolean|reference"/><!-- 是否成功后返回-->
         <attr name="canDragable" format="boolean|reference"/><!-- 是否可以拖拽-->
     </declare-styleable>
+
+
+    <declare-styleable name="FlipboardIconView">
+        <attr name="background_bitmap" format="reference"/>
+        <attr name="target_degree_y" format="integer"/>
+        <attr name="duration_degree_y" format="integer"/>
+        <attr name="duration_degree_z" format="integer"/>
+    </declare-styleable>
+
 </resources>

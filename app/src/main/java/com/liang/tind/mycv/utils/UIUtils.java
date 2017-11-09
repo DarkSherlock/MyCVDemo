@@ -28,12 +28,17 @@ public class UIUtils {
 
 	public static int getWindowHeight(Activity activity) {
 		DisplayMetrics mDisplayMetrics = new DisplayMetrics();
-		activity.getWindowManager().getDefaultDisplay()
-				.getMetrics(mDisplayMetrics);
+		activity.getWindowManager().getDefaultDisplay().getMetrics(mDisplayMetrics);
 
 		return mDisplayMetrics.heightPixels;
 	}
 
+	public static int getWindowWidth(Activity activity) {
+		DisplayMetrics mDisplayMetrics = new DisplayMetrics();
+		activity.getWindowManager().getDefaultDisplay().getMetrics(mDisplayMetrics);
+
+		return mDisplayMetrics.widthPixels;
+	}
 
 	public static int getStatusBarHeight(Context context) {
 		int resourceId = context.getResources().getIdentifier(

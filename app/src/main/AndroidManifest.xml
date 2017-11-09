@@ -33,7 +33,8 @@
                 android:resource="@xml/provider_paths"/>
         </provider>
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".activity.SplashActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -46,6 +47,8 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent"/>
+
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

@@ -2,6 +2,7 @@ package com.liang.tind.mycv.utils;
 
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,7 +125,7 @@ public class SnackbarUtil {
                 setSnackbarColor(snackbar, green);
                 break;
             case Warning:
-                setSnackbarColor(snackbar, ColorUtil.getColor(snackbar.getContext(),R.color.colorAccent));
+                setSnackbarColor(snackbar, ContextCompat.getColor(snackbar.getContext(),R.color.colorAccent));
                 break;
             case Alert:
                 setSnackbarColor(snackbar, Color.YELLOW, red);

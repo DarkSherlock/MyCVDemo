@@ -16,6 +16,7 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
@@ -48,7 +49,7 @@ public class SherlockApplicationLike extends DefaultApplicationLike {
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
         // 调试时，将第三个参数改为true
         application = (SherlockTinkerApplication) getApplication();
-        Bugly.init(application, "178d118966", false);
+        Bugly.init(application, "178d118966", true);
         initLeakCanary();
         initLogger();
         initLoadSir();
@@ -84,13 +85,13 @@ public class SherlockApplicationLike extends DefaultApplicationLike {
 
     private void initLeakCanary() {
 
-//        if (LeakCanary.isInAnalyzerProcess(application)) {
-//            // This process is dedicated to LeakCanary for heap analysis.
-//            // You should not init your app in this process.
-//            mRefWatcher = RefWatcher.DISABLED;
-//            return;
-//        }
-//        mRefWatcher=  LeakCanary.install(application);
+        if (LeakCanary.isInAnalyzerProcess(application)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            mRefWatcher = RefWatcher.DISABLED;
+            return;
+        }
+        mRefWatcher=  LeakCanary.install(application);
     }
 
 

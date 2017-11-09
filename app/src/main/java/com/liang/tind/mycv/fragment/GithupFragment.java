@@ -1,5 +1,6 @@
 package com.liang.tind.mycv.fragment;
 
+import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -9,7 +10,6 @@ import com.just.library.ChromeClientCallbackManager;
 import com.liang.tind.mycv.Constant;
 import com.liang.tind.mycv.MainActivity;
 import com.liang.tind.mycv.R;
-import com.liang.tind.mycv.utils.ColorUtil;
 import com.orhanobut.logger.Logger;
 
 /**
@@ -30,7 +30,7 @@ public class GithupFragment extends BaseFragment {
                 .setAgentWebParent((FrameLayout) view, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
                         FrameLayout.LayoutParams.MATCH_PARENT))
                 .useDefaultIndicator()// 使用默认进度条
-                .setIndicatorColor(ColorUtil.getColor(getContext(),R.color.colorAccent)) // 使用默认进度条颜色
+                .setIndicatorColor(ContextCompat.getColor(getContext(),R.color.colorAccent)) // 使用默认进度条颜色
                 .setReceivedTitleCallback(mCallback) //设置 Web 页面的 title 回调
                 .createAgentWeb()
                 .ready()

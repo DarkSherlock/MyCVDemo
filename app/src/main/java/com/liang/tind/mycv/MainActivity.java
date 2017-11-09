@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -37,7 +38,6 @@ import com.liang.tind.mycv.model.JobInfoBean;
 import com.liang.tind.mycv.module.MainModule;
 import com.liang.tind.mycv.presenter.MainPresenter;
 import com.liang.tind.mycv.utils.AlertDialogUtil;
-import com.liang.tind.mycv.utils.ColorUtil;
 import com.liang.tind.mycv.utils.FilesUtils;
 import com.liang.tind.mycv.utils.IntentUtil;
 import com.liang.tind.mycv.utils.OpenFileUtil;
@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
                 .inject(this);
 
         StatusBarUtil.setColorForDrawerLayout(MainActivity.this, mDrawerLayout,
-                ColorUtil.getColor(this, R.color.colorPrimary), 0);
+                ContextCompat.getColor(this, R.color.colorPrimary), 0);
 
         mPresenter.loadData(null);
         initProcessDialog();
@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
         mProcessDialog = new Dialog(this, R.style.AlertDialogStyle);
         View contentView = getLayoutInflater().inflate(R.layout.view_download_process_dialog, null);
         mProgressBarView = contentView.findViewById(R.id.ls);
-        mProgressBarView.setEndSuccessBackgroundColor(ColorUtil.getColor(this, R.color.colorAccent))//设置进度完成时背景颜色
+        mProgressBarView.setEndSuccessBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))//设置进度完成时背景颜色
                 .setCanDragChangeProgress(false)//是否进度条是否可以拖拽
                 .setCanReBack(true)//是否在进度成功后返回初始状态
                 .setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12,
@@ -218,7 +218,7 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
                 public void onComplete() {
 
                 }
-            });//开始下载简历
+            });
         });
 
         mProgressBarView.setStateChangedAnimationEndListener(new SpecialProgressBarView.StateChangedAnimationEndListener() {
@@ -275,7 +275,7 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
     public void showCVDownloadCompleted() {
         String message = getString(R.string.tip_cv_download_completed);
         Snackbar snackbar = SnackbarUtil.longSnackbar(mDrawerLayout, message, SnackbarUtil.Warning)
-                .setActionTextColor(ColorUtil.getColor(this, R.color.colorPrimary))
+                .setActionTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .setAction("打开文件", v -> openWordFile(new File(Constant.FILE.DOWNLOAD_DIR,
                         Constant.FILE.CV_FILE_NAME)));
         snackbar.show();

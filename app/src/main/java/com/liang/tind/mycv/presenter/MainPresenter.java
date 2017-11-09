@@ -51,7 +51,6 @@ public class MainPresenter extends BaseLoadDataPresenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
                     }
 
                     @Override

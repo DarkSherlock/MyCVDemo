@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -21,7 +22,6 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.liang.tind.mycv.R;
 import com.liang.tind.mycv.model.CvInfoBean;
-import com.liang.tind.mycv.utils.ColorUtil;
 
 import java.util.List;
 
@@ -95,7 +95,7 @@ public class ProjectIntroductionAdapter extends DelegateAdapter.Adapter<Recycler
                 //设置点击
                 smp.setSpan(clickableSpan, 0 , downloadUrl.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 //设置前景色
-                smp.setSpan(new ForegroundColorSpan(ColorUtil.getColor(context,R.color.selected_blue)),
+                smp.setSpan(new ForegroundColorSpan(ContextCompat.getColor(context,R.color.selected_blue)),
                         0, downloadUrl.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 normalViewHolder.mTvDownloadUrl.setMovementMethod(LinkMovementMethod.getInstance());
                 normalViewHolder.mTvDownloadUrl.setText(smp);
